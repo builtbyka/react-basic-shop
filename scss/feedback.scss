@@ -1,0 +1,36 @@
+#feedback{
+    @include box-sizing(border-box);
+    clear: both;
+    display:block;
+    position: relative;
+    
+    &.conditional-feedback{
+        display: none;
+        &.active{
+            @include fadeText(fadeIn, ease-in, 1s);
+        }
+    }
+    
+    &.cosmo-feedback{           
+        ul:not(.controls){    
+            opacity: 0;
+            overflow: auto;
+            
+            &.chosen{
+                opacity: 1;
+            }            
+            li{
+                list-style: none;
+                a{
+                    display: none;
+                }
+                &.chosen{
+                    a{
+                        @include fadeText(fadeIn, ease-in, 1s);
+                    }
+                }
+             }
+        }
+    }
+}
+

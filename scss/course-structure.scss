@@ -1,0 +1,74 @@
+#course-structure{
+    > header{
+        background: $light-grey;
+        border: 1px solid #333;
+        border-bottom: none;
+        padding: 10px;
+        
+        h2{
+            margin: 10px;
+        }
+    }
+    ul{
+        margin: 0;
+        margin-top: 16px;
+        li{
+            position: relative;
+            list-style: none;
+            margin: 0;
+
+            &:last-of-type{
+                border-bottom: 1px solid #333;
+                margin-bottom: 20px;
+            }
+
+            &.chosen{
+                background: $highlight;
+                a{
+                    &:after{
+                        color: $med-grey;
+                        content: 'Recommended for you';
+                        float: left;
+                        font-size: 10px;
+                        font-style: italic;
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+
+                      
+                    }
+
+                      &:hover{
+                            &:after{
+                                color: white;
+                            }
+                        }
+                }
+            }
+            a{
+                border: 1px solid #333;
+                border-bottom: 0;
+                color: #333;
+                display: block;
+                font-size: 16px;
+                padding: 20px;
+                text-decoration: none;
+
+                span{
+                    &:first-of-type{
+                        font-weight: bold;
+                    }
+                }
+
+                p{
+                    font-style: italic;
+                }
+
+                &:hover{
+                   background: $accent-blue;
+                   color: white;
+                }
+            }
+        }
+    }
+}

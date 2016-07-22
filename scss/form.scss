@@ -1,0 +1,81 @@
+form{
+    @include box-sizing(border-box);
+    font-size: 13px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+   
+    &.active{
+        @include fadeText(fadeIn, ease-in, 2s);
+    }
+    &.inactive{
+        display: none;
+    }
+    
+    &[aria-expanded="false"]{
+        max-height:0;
+    }
+    
+    &[aria-expanded="true"]{
+         max-height: 2500px;
+    }
+    
+    &.shrink{
+        @include shrink(0s);
+    }
+    &.shrinkslow{
+        @include shrink(0.5s);
+    }
+    fieldset{
+        border: none;
+        padding: 10px 0;
+    }
+    label{
+        clear: both;
+        display: block;
+        font-size: 14px;
+        padding: 0 0 10px;
+        margin-top: 15px;
+    }
+    
+    input{
+        margin-bottom: 5px;
+    }
+    
+    input[type="text"], input[type="number"]{
+        @include box-sizing(border-box);
+        padding: 5px;
+        width: 100%;
+    }
+    
+    input[type="checkbox"]{
+        margin-right: 5px;
+    }
+    
+    .temp-message{
+        @include box-sizing(border-box);
+        @include fadeIn(1s);
+        background-color: rgba(255,255,255,0.8);
+        left: 10%;
+        top: 20%;
+        padding: 40px;
+        position: absolute;
+        width: 80%;
+        
+        p{
+           @include blinking();
+           color: $accent-blue !important;
+           font-size: 18px !important;
+           text-align: center !important;
+        }
+    }
+    
+    textarea{
+        @include box-sizing(border-box);
+        border: 1px solid #cccccc;
+        min-height: 100px;
+        padding: 5px;
+        width: 100%;
+    }
+   
+}

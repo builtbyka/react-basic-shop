@@ -1,0 +1,21 @@
+#submissions{
+    clear: both;
+    margin-bottom: 40px;
+    .infowindow{
+        border: 1px solid $light-grey;
+        margin: 5px 0;
+        
+        > h2{
+           margin: 20px 0 10px; 
+        }
+    }
+    
+    > div:not(.infowindow){
+        display: none;
+        
+        &[aria-hidden="false"]{
+            @include fadeText(fadeIn, ease-in, .5s);
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,205 @@
+//boxes
+.element{
+    background-color: $key-area;
+    background-repeat: no-repeat;
+    background-position: 15px 15px;
+    padding: 15px;
+    margin: 20px 0;
+    
+    > h2{
+        padding-left: 45px;
+    }
+    
+    
+    header{
+        h2{
+            padding-left: 45px;
+        }
+    }
+}
+
+div.feedback{
+    @extend .element;
+    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@feedback");
+    border-bottom: 10px solid $accent-color;
+    & > h3{
+        margin: 0 0 20px 0;
+        padding-left: 45px;
+    }
+}
+
+.xblock--drag-and-drop{
+    @extend .element;
+    @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@interaction');
+}
+
+.individual-activity{
+    @extend .element;
+    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@individual");
+    border-bottom: 10px solid $accent-blue;
+}
+
+
+.info-box{
+    @extend .element;
+    background-color: $highlight;
+    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@info");
+    border: 1px solid #ccc;
+    padding-left: 55px;
+    
+    &.active{
+        @include fadeText(fadeIn, ease-in, 2s);
+    }
+    
+    p{
+        &:last-of-type{
+            margin-bottom: 0;
+        }
+    }
+}
+.keynote{
+    @extend .element;
+    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@keynote");
+    border-bottom: 10px solid $accent-color;
+}
+
+.example{
+    background: none;
+    margin: 20px 0;
+    p{
+        font-weight: bold;
+        margin: 5px;
+        text-align: center;
+    }
+}
+
+//activities
+ .imperial-activity{
+        header{
+            @extend .element;
+            &.wordcloud{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@wordcloud');
+            }
+            &.geotagging{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@geotagging');
+            }
+            &.interaction{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@interaction');
+            }
+            &.quiz{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@quiz');
+            }
+            &.question{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@question');
+            }
+            &.download{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@download');
+            }
+            &.scenario{
+                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@scenario');
+            }
+            border-bottom: 0;
+            margin-bottom: 0;
+            
+            h2{
+                margin-bottom: 0;
+            }
+            
+            & + p{
+                height: 0;
+                margin: 0;
+            }
+        }
+        .feedback{
+            margin-top: -20px;
+
+            &.cosmo-feedback{
+                background-image: none;
+            }
+        }
+        .activity{
+            @extend .element;
+            border-bottom: 10px solid $blue-grey;
+            margin-top: 0;
+            overflow: auto;
+            padding-top: 0;
+            
+            > h2{
+                margin-bottom: 20px;
+                padding-left: 35px;    
+            }
+
+            & + .feedback{
+                margin-top: 20px;
+            }
+            .info-box{
+                margin: 0;
+            }
+        }
+        @import 'chartdraw';
+        @import 'chartist';
+        @import 'feedback';
+        @import 'filters';
+        @import 'form';
+        @import 'infowindows';
+        @import 'geolocation';
+        @import 'limit';
+        @import 'maps';
+        @import 'pagination';
+        @import 'pathway';
+        @import 'submissions';
+        @import 'spinner';
+        @import 'warning';
+        @import 'wordcloud';
+    }
+    
+    .tooltips{
+        padding: 20px 0;
+        & > div{
+            margin: 20px 0;
+            position: relative;
+        }
+        [role="tooltip"]{
+            background: $blue-grey;
+            bottom: 10px;
+            border-radius: 5px;
+            display: none;
+            padding: 10px;
+            position: absolute;
+            bottom: 40px;
+            width: 50%;
+            
+            &:after{
+                    top: 100%;
+                    left: 30px;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-top-color: $blue-grey;
+                    border-width: 15px;
+                    margin-left: -15px;
+            }
+            
+            p{
+                color: white;
+                
+                &:last-of-type{
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .tooltipee{
+            border-bottom: 1px dashed #333;
+            display: inline;
+            &:hover + [role="tooltip"] {
+                @include fadeText(fadeIn, ease-in, 0.5s);
+                display: block;
+            }
+            
+        }
+        
+    }
+

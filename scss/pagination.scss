@@ -1,0 +1,23 @@
+.pagination{
+    float: right;
+    list-style: none;
+    overflow: auto;
+    width: auto;
+    li{
+        float: left;
+        overflow: auto;   
+       
+        a{
+            background: #ddd;
+            display: block;
+            margin: 0 2px;
+            padding: 5px;
+            text-decoration: none;
+            
+            &.active{
+                background: $accent-blue;
+                color: white;
+            }
+        }
+    }
+}

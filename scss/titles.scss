@@ -1,0 +1,18 @@
+//headers
+header{
+    h1{
+        color: $accent-blue;
+        font-size: 26px;
+        margin: 0 0 30px;
+    }
+}
+//module title
+.lesson-module{
+    p{
+        color: #767676;
+        font-size: 18px;
+        letter-spacing: -0.5px;
+        margin: 0;
+        text-transform: uppercase;
+    }
+}

@@ -1,0 +1,19 @@
+.image-swap{
+    > div{
+        display: none;
+
+        img{
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        &.active{
+            @include fadeText(fadeIn, ease-in, 1s);
+        }
+    }
+
+    > button{
+        float: right !important;
+    }
+}
