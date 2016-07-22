@@ -17,6 +17,7 @@ class App extends React.Component {
             environment: env,
             userID: this.getUser(env),
             userImg: this.getUserImg(env),
+            instance: this.getInstance(env),
             formToComplete : true,
             showFeedback : false,
             showThanks : false,
@@ -61,16 +62,6 @@ class App extends React.Component {
             }         
         }
         return ans;
-    }
-   
-    // have the answered? say thank you!
-
-    showThanks(){
-        let ja = document.getElementById('js-activity'),
-            ib = document.createElement('div');
-            ib.className = 'info-box active';
-            ib.innerHTML = '<p>Thank you for your submission, please see the results and feedback below</p>';
-            ja.insertBefore(ib, ja.firstChild);    
     }
 
     //What environment we working in? Needs work to be more robust
@@ -160,15 +151,42 @@ class App extends React.Component {
         }
     }
 
+    //initial state set, now get database results
+
+    componentDidMount() {
+        let dr = this.state.databaseRequest.substring(0, this.state.databaseRequest.length - 1),
+        // whichWhere = (this.state.private ? 'userID="'+this.state.userID+'" AND ' : ''),
+        //request = 'SELECT userID,'+dr+' FROM '+this.state.id+' WHERE '+whichWhere+'instanceID="'+this.state.instance+'"',
+
+        // you are trying to do 2 sql requests in one, the union below brings back one result so needs equal amount of queries. You need one call but two questions. 
+
+        request = 'SELECT '+dr+' FROM '+this.state.id+' WHERE instanceID="'+this.state.instance+'" UNION ALL SELECT userID, example_1, example_2 FROM '+this.state.id+' WHERE userID="'+this.state.userID+'" AND instanceID="'+this.state.instance+'"',
+        sql = encodeURI(request);      
+        fetch('https://ib-ed.tech/api/exercise/'+sql)
+            .then(function(response) {
+                if (response.status >= 400) {
+                    throw new Error('Bad response from server');
+                }
+                return response.json();
+            })
+            .then((results) => {
+                console.log(results);
+                // if(results.length > 0){
+                //     this.setState({formToComplete: false})
+                //     this.setState({showFeedback: true});
+                //     this.setState({answers: results[0]});
+                // }
+            });
+    }
+
+    getRequest(request){
+
+    }
+
     //update answers when form is interacted with
 
     onFormInput(eo){
         let se = eo.currentTarget;
-        console.log(se);
-        let checked = 0;      
-        if(se.checked){
-            checked = 1;
-        }
         let answersNew = Object.assign({}, this.state.answers);
         answersNew[se.name] = se.value;
         this.setState({answers : answersNew});
