@@ -1,31 +1,10 @@
 form{
-    @include box-sizing(border-box);
+    @include fadeText(fadeIn, ease-in, 1s);
     font-size: 13px;
     margin-bottom: 20px;
     overflow: hidden;
     position: relative;
-   
-    &.active{
-        @include fadeText(fadeIn, ease-in, 2s);
-    }
-    &.inactive{
-        display: none;
-    }
     
-    &[aria-expanded="false"]{
-        max-height:0;
-    }
-    
-    &[aria-expanded="true"]{
-         max-height: 2500px;
-    }
-    
-    &.shrink{
-        @include shrink(0s);
-    }
-    &.shrinkslow{
-        @include shrink(0.5s);
-    }
     fieldset{
         border: none;
         padding: 10px 0;

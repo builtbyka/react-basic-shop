@@ -18,7 +18,9 @@ class App extends React.Component {
             userID: this.getUser(env),
             userImg: this.getUserImg(env),
             instance: this.getInstance(env),
+            private: false,
             formToComplete : true,
+            formCTA: 'Submit',
             showFeedback : false,
             showThanks : false,
             markers : [],
@@ -37,6 +39,7 @@ class App extends React.Component {
                     options: ['Sun', 'Rain', 'Wind', 'Fog']          
                  },
             }, 
+            userAnswers: {},
             answers: {},  
             databaseRequest: '',
         };
@@ -45,7 +48,7 @@ class App extends React.Component {
         this.state.answers = this.dynamicResults(this.state.questions, 'obj');
         this.state.databaseRequest = this.dynamicResults(this.state.questions, 'str');
 
-        
+        this.editForm = this.editForm.bind(this);
         this.onFormInput = this.onFormInput.bind(this);
 	}
 
@@ -100,7 +103,7 @@ class App extends React.Component {
                 break;
             default:
                 let math = Math.floor((Math.random() * 1000) + 1);
-                return 'testUrssss';
+                return 'testUr';
                 break;
         }
     }
@@ -117,7 +120,6 @@ class App extends React.Component {
                     if(img.indexOf('?') > 0){
                         img = img.substring(0, img.indexOf('?'));
                     }
-                    console.log(img);
                 }else{
                     img = 'https://d3vz9i37d3bazy.cloudfront.net/static/images/profiles/default_50.3455a6581573.png';
                 }
@@ -155,13 +157,16 @@ class App extends React.Component {
 
     componentDidMount() {
         let dr = this.state.databaseRequest.substring(0, this.state.databaseRequest.length - 1),
-        // whichWhere = (this.state.private ? 'userID="'+this.state.userID+'" AND ' : ''),
-        //request = 'SELECT userID,'+dr+' FROM '+this.state.id+' WHERE '+whichWhere+'instanceID="'+this.state.instance+'"',
+        answeredRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE userID="'+this.state.userID+'" AND instanceID="'+this.state.instance+'"';
+        this.getRequest(answeredRequest, 'answered');
+        if(!this.state.private){
+            let pubRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE instanceID="'+this.state.instance+'" AND userID !="'+this.state.userID+'"';
+            this.getRequest(pubRequest, 'all');
+        }
+    }
 
-        // you are trying to do 2 sql requests in one, the union below brings back one result so needs equal amount of queries. You need one call but two questions. 
-
-        request = 'SELECT '+dr+' FROM '+this.state.id+' WHERE instanceID="'+this.state.instance+'" UNION ALL SELECT userID, example_1, example_2 FROM '+this.state.id+' WHERE userID="'+this.state.userID+'" AND instanceID="'+this.state.instance+'"',
-        sql = encodeURI(request);      
+    getRequest(request, requestType){
+        let sql = encodeURI(request);      
         fetch('https://ib-ed.tech/api/exercise/'+sql)
             .then(function(response) {
                 if (response.status >= 400) {
@@ -170,17 +175,14 @@ class App extends React.Component {
                 return response.json();
             })
             .then((results) => {
-                console.log(results);
-                // if(results.length > 0){
-                //     this.setState({formToComplete: false})
-                //     this.setState({showFeedback: true});
-                //     this.setState({answers: results[0]});
-                // }
+                if(requestType === 'answered' && results.length > 0){
+                    this.setState({formToComplete: false, showFeedback: true, userAnswers: results[0], formCTA: 'Resubmit'});
+                }else{
+                    this.setState({answers: results});
+
+                }
+               
             });
-    }
-
-    getRequest(request){
-
     }
 
     //update answers when form is interacted with
@@ -192,14 +194,20 @@ class App extends React.Component {
         this.setState({answers : answersNew});
     }
 
+    //editForm should show previous entry
+
+    editForm(){
+        this.setState({formToComplete : true});
+    }
+
     //render it!
   
 	render(){
-        let form, 
+        let form = (<button onClick={this.editForm}>Edit form</button>), 
             feedback,
             thankyou;
             if(this.state.formToComplete){
-                form = ( <Form components={this.state.questions} onSelect={this.onFormInput} onSubmit={this.onSubmit}/>);
+                form = ( <Form components={this.state.questions} prefill={this.state.userAnswers} onSelect={this.onFormInput} onSubmit={this.onSubmit} cta={this.state.formCTA}/>);
             }
             if(this.state.showFeedback){
                 feedback = (<Feedback/>);

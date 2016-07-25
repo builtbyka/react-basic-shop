@@ -38,12 +38,12 @@ module.exports = {
 		}]
 	},
 	plugins:[new webpack.DefinePlugin({
-		"process.env": {
-			// This has effect on the react lib size
-			//set to production for build
-			"NODE_ENV": JSON.stringify("development")
-		},
-		__DEV__:true
-	})]
+	"process.env": {
+	// This has effect on the react lib size
+	//set to production for build
+	"NODE_ENV": JSON.stringify("production")
+	},
+	__DEV__:true
+	}), new webpack.optimize.UglifyJsPlugin()]
 
 };

@@ -7,12 +7,12 @@ import Textarea from './components/Textarea.jsx';
 class FormComponents extends React.Component {
 
     inputType(props){
-        let {type, options, onSelect, feedback, name} = props;
+        let {type, options, onSelect, feedback, name, prefill} = this.props;
         let inputs = {
             checkbox : (<Checkbox/>),
-            dropdown : (<Dropdown  onSelect={onSelect} options={options}/>),
-            text : (<Text name={name} onSelect={onSelect}/>),
-            textarea : (<Textarea name={name} onInput={onSelect}/>) 
+            dropdown : (<Dropdown prefill={prefill} onSelect={onSelect} options={options}/>),
+            text : (<Text prefill={prefill} name={name} onSelect={onSelect}/>),
+            textarea : (<Textarea prefill={prefill} name={name} onInput={onSelect}/>) 
         }
         return inputs[type];
     }

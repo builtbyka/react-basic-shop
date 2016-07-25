@@ -7,13 +7,13 @@ class Form extends React.Component {
         super(props);
     }
 	render(){
-        let {components, onSelect, onSubmit} = this.props,
+        let {components, onSelect, onSubmit, cta, prefill} = this.props,
         counter = 0,
         FormBuilding = Object.keys(components).map(
             key => {
                 counter ++;
                 return (
-                    <FormBuilder onSelect={onSelect} key={counter} question={key} name={components[key].name} type={components[key].type} options={components[key].options}/>
+                    <FormBuilder prefill={prefill[components[key].name]} onSelect={onSelect} key={counter} question={key} name={components[key].name} type={components[key].type} options={components[key].options}/>
                 )
                 
             }
@@ -22,7 +22,7 @@ class Form extends React.Component {
            <div>
                 <form>
                     {FormBuilding}
-                    <input id="submit" onClick={onSubmit} type="submit" value="Submit" />
+                    <input id="submit" onClick={onSubmit} type="submit" value={cta} />
                 </form>
           </div> 
 		)
