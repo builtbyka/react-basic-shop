@@ -38,6 +38,11 @@ class App extends React.Component {
                     name : 'example_3',
                     options: ['Sun', 'Rain', 'Wind', 'Fog']          
                  },
+                  'Example 4 question' : {
+                    type : 'slider', 
+                    name : 'example_4',
+                    options: [5, 0, 3]          
+                 },
             }, 
             userAnswers: {},
             answers: {},  
@@ -45,7 +50,7 @@ class App extends React.Component {
         };
 
         //populate answers object and dynamic part of database request string with the questions here
-        this.state.answers = this.dynamicResults(this.state.questions, 'obj');
+        this.state.userAnswers = this.dynamicResults(this.state.questions, 'obj');
         this.state.databaseRequest = this.dynamicResults(this.state.questions, 'str');
 
         this.editForm = this.editForm.bind(this);
@@ -189,9 +194,10 @@ class App extends React.Component {
 
     onFormInput(eo){
         let se = eo.currentTarget;
-        let answersNew = Object.assign({}, this.state.answers);
+        let answersNew = Object.assign({}, this.state.userAnswers);
         answersNew[se.name] = se.value;
-        this.setState({answers : answersNew});
+        console.log(answersNew);
+        this.setState({userAnswers : answersNew});
     }
 
     //editForm should show previous entry
