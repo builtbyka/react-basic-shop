@@ -41,7 +41,7 @@ class App extends React.Component {
                   'Example 4 question' : {
                     type : 'slider', 
                     name : 'example_4',
-                    options: [5, 0, 3]          
+                    options: [0, 5, 0]     // min, max, starting val     
                  },
             }, 
             userAnswers: {},
@@ -51,10 +51,12 @@ class App extends React.Component {
 
         //populate answers object and dynamic part of database request string with the questions here
         this.state.userAnswers = this.dynamicResults(this.state.questions, 'obj');
+        //start user answers object, but if certain type of input put in default value
         this.state.databaseRequest = this.dynamicResults(this.state.questions, 'str');
 
         this.editForm = this.editForm.bind(this);
         this.onFormInput = this.onFormInput.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 	}
 
     // uses the questions to create a dynamic string 
@@ -66,7 +68,19 @@ class App extends React.Component {
             if(type === 'str'){
                 ans += q[key].name +',';
             }else{
-                ans[q[key].name] = '';
+                let val = '',
+                arr = [];
+                switch(q[key].type) {
+                    case 'dropdown':
+                        arr = q[key].options;
+                        val = arr[0];
+                        break;
+                    case 'slider':
+                   	    arr = q[key].options;
+                        val = arr[2];
+                        break;
+                }
+                ans[q[key].name] = val;
             }         
         }
         return ans;
@@ -162,7 +176,7 @@ class App extends React.Component {
 
     componentDidMount() {
         let dr = this.state.databaseRequest.substring(0, this.state.databaseRequest.length - 1),
-        answeredRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE userID="'+this.state.userID+'" AND instanceID="'+this.state.instance+'"';
+        answeredRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE userID="'+this.state.userID+'" AND instanceID="'+this.state.instance+'" ORDER BY TimeStampUTC DESC LIMIT 1';
         this.getRequest(answeredRequest, 'answered');
         if(!this.state.private){
             let pubRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE instanceID="'+this.state.instance+'" AND userID !="'+this.state.userID+'"';
@@ -196,7 +210,6 @@ class App extends React.Component {
         let se = eo.currentTarget;
         let answersNew = Object.assign({}, this.state.userAnswers);
         answersNew[se.name] = se.value;
-        console.log(answersNew);
         this.setState({userAnswers : answersNew});
     }
 
@@ -204,6 +217,21 @@ class App extends React.Component {
 
     editForm(){
         this.setState({formToComplete : true});
+    }
+
+    //on submit
+
+    onSubmit(e){
+        e.preventDefault();
+        let submission = {userID: this.state.userID,environment:this.state.environment,instanceID:this.state.instance};
+        for (var attrname in this.state.userAnswers) { submission[attrname] = this.state.userAnswers[attrname]; }
+        fetch('https://ib-ed.tech/api/exercise/'+this.state.id, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify([submission])
+        }).then(response => console.log(response))
     }
 
     //render it!
