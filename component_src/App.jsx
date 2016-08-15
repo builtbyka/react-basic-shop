@@ -122,7 +122,7 @@ class App extends React.Component {
                 break;
             default:
                 let math = Math.floor((Math.random() * 1000) + 1);
-                return 'testUr';
+                return 'testUr1';
                 break;
         }
     }
@@ -179,7 +179,7 @@ class App extends React.Component {
         answeredRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE userID="'+this.state.userID+'" AND instanceID="'+this.state.instance+'" ORDER BY TimeStampUTC DESC LIMIT 1';
         this.getRequest(answeredRequest, 'answered');
         if(!this.state.private){
-            let pubRequest = 'SELECT '+dr+' FROM '+this.state.id+' WHERE instanceID="'+this.state.instance+'" AND userID !="'+this.state.userID+'"';
+            let pubRequest = 'SELECT '+dr+' FROM '+this.state.id+' JOIN (SELECT MAX(timeStampUTC) MAXTIME, userID FROM  '+this.state.id+' WHERE userID!="'+this.state.userID+'" GROUP BY USERID) LATEST ON  '+this.state.id+'.timeStampUTC=LATEST.MAXTIME and  '+this.state.id+'.userID=LATEST.userID LIMIT 50';
             this.getRequest(pubRequest, 'all');
         }
     }
@@ -198,9 +198,8 @@ class App extends React.Component {
                     this.setState({formToComplete: false, showFeedback: true, userAnswers: results[0], formCTA: 'Resubmit'});
                 }else{
                     this.setState({answers: results});
-
                 }
-               
+                console.log(this.state);               
             });
     }
 
