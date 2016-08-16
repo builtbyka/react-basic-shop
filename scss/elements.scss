@@ -171,6 +171,11 @@ div.feedback{
         @import 'warning';
         @import 'wordcloud';
     }
+
+    .activity-result{
+        clear: both;
+        padding: 10px 0;
+    }
     
     .tooltips{
         padding: 20px 0;

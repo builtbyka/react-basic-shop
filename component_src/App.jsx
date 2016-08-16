@@ -1,7 +1,9 @@
 import React from 'react';
 import Feedback from './feedback/feedback.jsx';
 import Form from './form/form.jsx';
-import Thankyou from './feedback/thankyou.jsx';
+import Error from './feedback/error.jsx';
+import Success from './feedback/success.jsx';
+import Activity from './activities/activity.jsx';
 
 class App extends React.Component {
 
@@ -23,6 +25,7 @@ class App extends React.Component {
             formToComplete : true,
             formCTA: 'Submit',
             errorMessage : false,
+            showResult : false,
             showFeedback : false,
             showThanks : false,
             successMessage : false,
@@ -199,7 +202,7 @@ class App extends React.Component {
             })
             .then((results) => {
                 if(requestType === 'answered' && results.length > 0){
-                    this.setState({formToComplete: false, showFeedback: true, userAnswers: results[0], formCTA: 'Resubmit'});
+                    this.setState({formToComplete: false, showResult: true, showFeedback: true, userAnswers: results[0], formCTA: 'Resubmit'});
                 }else{
                     this.setState({answers: results});
                 }            
@@ -220,6 +223,7 @@ class App extends React.Component {
     editForm(){
         this.setState({formToComplete : true});
         this.setState({closeTheForm : true});
+        this.setState({successMessage : false});
     }
 
     closeForm(e){
@@ -257,16 +261,21 @@ class App extends React.Component {
         let form = (<button onClick={this.editForm}>Edit form</button>), 
             error,
             success,
+            activity,
             feedback;
             if(this.state.errorMessage){
-                error = (<div className="error"><h3>An error has occurred</h3><p>Please refresh the page and try again</p></div>);
+                error = (<Error/>);
             }
             if(this.state.successMessage){
-                success = (<div className="success"><h3>Thank you for your submission</h3><p>Please see below for your results</p></div>);
+                success = (<Success/>);
             }
             if(this.state.formToComplete){
                 form = ( <Form components={this.state.questions} prefill={this.state.userAnswers} onSelect={this.onFormInput} onSubmit={this.onSubmit} closeTheForm={this.state.closeTheForm} closeForm={this.closeForm} cta={this.state.formCTA}/>);
             }
+            if(this.state.showFeedback){
+                activity = (<Activity/>);
+            }
+
             if(this.state.showFeedback){
                 feedback = (<Feedback/>);
             }
@@ -276,6 +285,7 @@ class App extends React.Component {
                     {error}
                     {success}
                     {form}
+                    {activity}
                  </div>
                     {feedback}
             </div>
