@@ -29,6 +29,7 @@ class App extends React.Component {
             showFeedback : false,
             showThanks : false,
             successMessage : false,
+            loader: false,
             markers : [],
             questions : {
                 'Example 1 question' : {
@@ -246,8 +247,11 @@ class App extends React.Component {
         }).then(
             response => {
                     if(response.status === 200){
-                        this.setState({successMessage:true});
-                        this.setState({formToComplete:false});
+                        this.setState({successMessage:true, formToComplete:false, showResult:false});
+                        this.setState({loader: true});
+                        // let that = this;
+                        // setTimeout(function(){that.setState({loader: false, showResult: true}); }, 800);
+
                     }else{
                         this.setState({errorMessage:true});
                     }
@@ -262,7 +266,8 @@ class App extends React.Component {
             error,
             success,
             activity,
-            feedback;
+            feedback,
+            loader;
             if(this.state.errorMessage){
                 error = (<Error/>);
             }
@@ -272,8 +277,11 @@ class App extends React.Component {
             if(this.state.formToComplete){
                 form = ( <Form components={this.state.questions} prefill={this.state.userAnswers} onSelect={this.onFormInput} onSubmit={this.onSubmit} closeTheForm={this.state.closeTheForm} closeForm={this.closeForm} cta={this.state.formCTA}/>);
             }
-            if(this.state.showFeedback){
+            if(this.state.showResult){
                 activity = (<Activity/>);
+            }
+            if(this.state.loader){
+                loader = <div className="loader">Loading...</div>;
             }
 
             if(this.state.showFeedback){
@@ -285,6 +293,7 @@ class App extends React.Component {
                     {error}
                     {success}
                     {form}
+                    {loader}
                     {activity}
                  </div>
                     {feedback}
