@@ -19,10 +19,13 @@ class App extends React.Component {
             userImg: this.getUserImg(env),
             instance: this.getInstance(env),
             private: false,
+            closeTheForm: false,
             formToComplete : true,
             formCTA: 'Submit',
+            errorMessage : false,
             showFeedback : false,
             showThanks : false,
+            successMessage : false,
             markers : [],
             questions : {
                 'Example 1 question' : {
@@ -55,6 +58,7 @@ class App extends React.Component {
         this.state.databaseRequest = this.dynamicResults(this.state.questions, 'str');
 
         this.editForm = this.editForm.bind(this);
+        this.closeForm = this.closeForm.bind(this);
         this.onFormInput = this.onFormInput.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -198,8 +202,7 @@ class App extends React.Component {
                     this.setState({formToComplete: false, showFeedback: true, userAnswers: results[0], formCTA: 'Resubmit'});
                 }else{
                     this.setState({answers: results});
-                }
-                console.log(this.state);               
+                }            
             });
     }
 
@@ -216,6 +219,12 @@ class App extends React.Component {
 
     editForm(){
         this.setState({formToComplete : true});
+        this.setState({closeTheForm : true});
+    }
+
+    closeForm(e){
+        e.preventDefault();
+       this.setState({formToComplete : false});
     }
 
     //on submit
@@ -230,29 +239,43 @@ class App extends React.Component {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify([submission])
-        }).then(response => console.log(response))
+        }).then(
+            response => {
+                    if(response.status === 200){
+                        this.setState({successMessage:true});
+                        this.setState({formToComplete:false});
+                    }else{
+                        this.setState({errorMessage:true});
+                    }
+                }
+            )
     }
 
     //render it!
   
 	render(){
         let form = (<button onClick={this.editForm}>Edit form</button>), 
-            feedback,
-            thankyou;
+            error,
+            success,
+            feedback;
+            if(this.state.errorMessage){
+                error = (<div className="error"><h3>An error has occurred</h3><p>Please refresh the page and try again</p></div>);
+            }
+            if(this.state.successMessage){
+                success = (<div className="success"><h3>Thank you for your submission</h3><p>Please see below for your results</p></div>);
+            }
             if(this.state.formToComplete){
-                form = ( <Form components={this.state.questions} prefill={this.state.userAnswers} onSelect={this.onFormInput} onSubmit={this.onSubmit} cta={this.state.formCTA}/>);
+                form = ( <Form components={this.state.questions} prefill={this.state.userAnswers} onSelect={this.onFormInput} onSubmit={this.onSubmit} closeTheForm={this.state.closeTheForm} closeForm={this.closeForm} cta={this.state.formCTA}/>);
             }
             if(this.state.showFeedback){
                 feedback = (<Feedback/>);
             }
-            if(this.state.showThanks){
-                thankyou = (<Thankyou/>);
-            }
 		return (
 			<div>
                 <div className="activity">
+                    {error}
+                    {success}
                     {form}
-                    {thankyou}
                  </div>
                     {feedback}
             </div>

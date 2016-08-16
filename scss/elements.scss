@@ -18,6 +18,24 @@
     }
 }
 
+div.error{
+    @extend .element;
+    @include fadeText(fadeIn, ease-in, 1s);
+    background: $incorrect;
+    h3{
+        margin-top: 0;
+    }
+}
+
+div.success{
+    @extend .element;
+    @include fadeText(fadeIn, ease-in, 1s);
+    background: $highlight;
+    h3{
+        margin-top: 0;
+    }
+}
+
 div.feedback{
     @extend .element;
     @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@feedback");
