@@ -7,7 +7,7 @@ import Textarea from './components/Textarea.jsx';
 
 class FormComponents extends React.Component {
 
-    inputType(props){
+    inputType(){
         let {type, options, onSelect, feedback, name, prefill} = this.props;
         let inputs = {
             checkbox : (<Checkbox/>),
@@ -21,7 +21,7 @@ class FormComponents extends React.Component {
 
 	render(){
         let question = this.props.question,
-        input = this.inputType(this.props);
+        input = this.inputType();
             
 		return (
           <fieldset>
