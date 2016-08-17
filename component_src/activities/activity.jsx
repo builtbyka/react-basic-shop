@@ -1,9 +1,13 @@
 import React from 'react';
 
 class Activity extends React.Component {
+    
+    constructor(props){
+        super(props);
+    }
 	render(){
 		return (
-            	<div className="activity-result"><p>Hi</p></div>
+           <div className="activity-result"></div> 
 		)
 	}
 }
