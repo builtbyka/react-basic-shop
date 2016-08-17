@@ -1,9 +1,10 @@
 import React from 'react';
-import Feedback from './feedback/feedback.jsx';
 import Form from './form/form.jsx';
 import Error from './feedback/error.jsx';
 import Success from './feedback/success.jsx';
+import Feedback from './feedback/feedback.jsx';
 import Activity from './activities/activity.jsx';
+
 
 class App extends React.Component {
 
