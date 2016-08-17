@@ -25,10 +25,10 @@ class App extends React.Component {
             showResult : false,
             showFeedback : false,
             showThanks : false,
-            successMessage : false,
             markers : [],
             userAnswers: {},
-            answers: {},  
+            answers: {},
+            answered: false,  
             databaseRequest: '',
             questions : {
                 'Example 1 question' : {
@@ -121,7 +121,7 @@ class App extends React.Component {
                 break;
             default:
                 let math = Math.floor((Math.random() * 1000) + 1);
-                return 'tessdfftUr1';
+                return 'teeeeUr1';
                 break;
         }
     }
@@ -194,8 +194,7 @@ class App extends React.Component {
             })
             .then((results) => {
                 if(requestType === 'answered' && results.length > 0){
-                    this.setState({userAnswers: results[0]});
-                    this.onFormResult();
+                    this.setState({userAnswers: results[0], answered: true});
                 }else{
                     this.setState({answers: results});
                 }            
@@ -209,7 +208,7 @@ class App extends React.Component {
             feedback,
             inputelement;
            if(this.state.inputElement){
-               inputelement = (<InputElement questions={this.state.questions} userAnswers={this.state.userAnswers} answers={this.state.answers}/>);
+               inputelement = (<InputElement state={this.state}/>);
            }
             if(this.state.showResult){
                 activity = (<Activity/>);

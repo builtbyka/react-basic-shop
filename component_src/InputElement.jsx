@@ -7,15 +7,11 @@ class InputElement extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            closeTheForm: false,
-            formToComplete : true,
-            formCTA: 'Submit',
-            errorMessage : false,
-            questions : this.props.questions,
-            userAnswers : this.props.userAnswers,
-            answers : this.props.answers
-        }
+        this.state = this.props.state;
+        this.state.closeTheForm = false;
+        this.state.formToComplete = !this.props.answered;
+        this.state.formCTA = 'Submit';
+        this.state.errorMessage = false;
 
         this.editForm = this.editForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
