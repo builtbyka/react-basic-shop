@@ -247,8 +247,8 @@ class App extends React.Component {
         }).then(
             response => {
                     if(response.status === 200){
-                        this.setState({successMessage:true, formToComplete:false, showResult:false});
-                        this.setState({loader: true});
+                        this.setState({successMessage:true, formToComplete:false, showResult:true});
+                        //this.setState({loader: true});
                         // let that = this;
                         // setTimeout(function(){that.setState({loader: false, showResult: true}); }, 800);
 
