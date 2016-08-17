@@ -229,7 +229,7 @@ class App extends React.Component {
 
     closeForm(e){
         e.preventDefault();
-       this.setState({formToComplete : false});
+        this.setState({formToComplete : false});
     }
 
     //on submit
@@ -248,6 +248,7 @@ class App extends React.Component {
             response => {
                     if(response.status === 200){
                         this.setState({successMessage:true, formToComplete:false, showResult:true});
+                        
                         //this.setState({loader: true});
                         // let that = this;
                         // setTimeout(function(){that.setState({loader: false, showResult: true}); }, 800);
@@ -262,7 +263,7 @@ class App extends React.Component {
     //render it!
   
 	render(){
-        let form = (<button onClick={this.editForm}>Edit form</button>), 
+        let form = (<button onClick={this.editForm} className="appearing">Edit form</button>), 
             error,
             success,
             activity,

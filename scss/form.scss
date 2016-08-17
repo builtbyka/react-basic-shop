@@ -4,6 +4,10 @@ form{
     margin-bottom: 20px;
     overflow: hidden;
     position: relative;
+
+    &.unrender{
+        @include fadeText(fadeOut, ease-in, 1s);
+    }
     
     fieldset{
         border: none;

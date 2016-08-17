@@ -32,6 +32,10 @@ button:not(.bookmark-button):not(.control):not(.add-xblock-component-button):not
         &.inactive{
             @include fadeText(fadeOut, ease-in, 0.5s);
         }
+
+        &.appearing{
+            @include fadeText(fadeIn, ease-in, 0.5s);
+        }
     }
 
 
