@@ -1,8 +1,6 @@
 import React from 'react';
-import Form from './form/form.jsx';
-import Error from './feedback/error.jsx';
-import Success from './feedback/success.jsx';
 import Feedback from './feedback/feedback.jsx';
+import InputElement from './InputElement.jsx';
 import Activity from './activities/activity.jsx';
 
 
@@ -22,16 +20,16 @@ class App extends React.Component {
             userImg: this.getUserImg(env),
             instance: this.getInstance(env),
             private: false,
-            closeTheForm: false,
-            formToComplete : true,
-            formCTA: 'Submit',
-            errorMessage : false,
+            inputElement : true,
+            outputElement : true,
             showResult : false,
             showFeedback : false,
             showThanks : false,
             successMessage : false,
-            loader: false,
             markers : [],
+            userAnswers: {},
+            answers: {},  
+            databaseRequest: '',
             questions : {
                 'Example 1 question' : {
                     type : 'textarea',
@@ -51,22 +49,13 @@ class App extends React.Component {
                     name : 'example_4',
                     options: [0, 5, 0]     // min, max, starting val     
                  },
-            }, 
-            userAnswers: {},
-            answers: {},  
-            databaseRequest: '',
+            }
         };
 
         //populate answers object and dynamic part of database request string with the questions here
         this.state.userAnswers = this.dynamicResults(this.state.questions, 'obj');
         //start user answers object, but if certain type of input put in default value
         this.state.databaseRequest = this.dynamicResults(this.state.questions, 'str');
-
-        this.editForm = this.editForm.bind(this);
-        this.closeForm = this.closeForm.bind(this);
-        this.onFormInput = this.onFormInput.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onFormResult = this.onFormResult.bind(this);
 	}
 
     // uses the questions to create a dynamic string 
@@ -213,92 +202,25 @@ class App extends React.Component {
             });
     }
 
-    //update answers when form is interacted with
-
-    onFormInput(eo){
-        let se = eo.currentTarget;
-        let answersNew = Object.assign({}, this.state.userAnswers);
-        answersNew[se.name] = se.value;
-        this.setState({userAnswers : answersNew});
-    }
-
-    //editForm should show previous entry
-
-    editForm(){
-        this.setState({formToComplete : true});
-        this.setState({closeTheForm : true});
-        this.setState({successMessage : false});
-    }
-
-    closeForm(e){
-        e.preventDefault();
-        this.setState({formToComplete : false});
-    }
-
-    //on submit
-
-    onSubmit(e){
-        e.preventDefault();
-        let submission = {userID: this.state.userID,environment:this.state.environment,instanceID:this.state.instance};
-        for (var attrname in this.state.userAnswers) { submission[attrname] = this.state.userAnswers[attrname]; }
-        fetch('https://ib-ed.tech/api/exercise/'+this.state.id, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify([submission])
-        }).then(
-            response => {
-                    if(response.status === 200){
-                        this.setState({successMessage:true});
-                        this.onFormResult();
-
-                    }else{
-                        this.setState({errorMessage:true});
-                    }
-                }
-            )
-    }
-
-    onFormResult(){
-        this.setState({formToComplete:false, showResult:true, showFeedback: true,  formCTA: 'Resubmit'});
-    }
-
     //render it!
   
 	render(){
-        let form = (<button onClick={this.editForm} className="appearing">Edit form</button>), 
-            error,
-            success,
-            activity,
+        let activity,
             feedback,
-            loader;
-            if(this.state.errorMessage){
-                error = (<Error/>);
-            }
-            if(this.state.successMessage){
-                success = (<Success/>);
-            }
-            if(this.state.formToComplete){
-                form = ( <Form components={this.state.questions} prefill={this.state.userAnswers} onSelect={this.onFormInput} onSubmit={this.onSubmit} closeTheForm={this.state.closeTheForm} closeForm={this.closeForm} cta={this.state.formCTA}/>);
-            }
+            inputelement;
+           if(this.state.inputElement){
+               inputelement = (<InputElement questions={this.state.questions} userAnswers={this.state.userAnswers} answers={this.state.answers}/>);
+           }
             if(this.state.showResult){
                 activity = (<Activity/>);
             }
-            if(this.state.loader){
-                loader = <div className="loader">Loading...</div>;
-            }
-
             if(this.state.showFeedback){
                 feedback = (<Feedback/>);
             }
 		return (
 			<div>
                 <div className="activity">
-                    {error}
-                    {success}
-                    {form}
-                    {loader}
+                    {inputelement}
                     {activity}
                  </div>
                     {feedback}
