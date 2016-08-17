@@ -1,9 +1,9 @@
 import React from 'react';
-import Checkbox from './components/Checkbox.jsx';
-import Dropdown from './components/Dropdown.jsx';
-import Slider from './components/Slider.jsx';
-import Text from './components/Text.jsx';
-import Textarea from './components/Textarea.jsx';
+import Checkbox from './elements/Checkbox.jsx';
+import Dropdown from './elements/Dropdown.jsx';
+import Slider from './elements/Slider.jsx';
+import Text from './elements/Text.jsx';
+import Textarea from './elements/Textarea.jsx';
 
 class FormComponents extends React.Component {
 
