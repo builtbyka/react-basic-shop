@@ -65,6 +65,7 @@ class App extends React.Component {
         this.closeForm = this.closeForm.bind(this);
         this.onFormInput = this.onFormInput.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onFormResult = this.onFormResult.bind(this);
 	}
 
     // uses the questions to create a dynamic string 
@@ -130,7 +131,7 @@ class App extends React.Component {
                 break;
             default:
                 let math = Math.floor((Math.random() * 1000) + 1);
-                return 'testUr1';
+                return 'tessdfftUr1';
                 break;
         }
     }
@@ -203,7 +204,8 @@ class App extends React.Component {
             })
             .then((results) => {
                 if(requestType === 'answered' && results.length > 0){
-                    this.setState({formToComplete: false, showResult: true, showFeedback: true, userAnswers: results[0], formCTA: 'Resubmit'});
+                    this.setState({userAnswers: results[0]});
+                    this.onFormResult();
                 }else{
                     this.setState({answers: results});
                 }            
@@ -247,17 +249,18 @@ class App extends React.Component {
         }).then(
             response => {
                     if(response.status === 200){
-                        this.setState({successMessage:true, formToComplete:false, showResult:true});
-                        
-                        //this.setState({loader: true});
-                        // let that = this;
-                        // setTimeout(function(){that.setState({loader: false, showResult: true}); }, 800);
+                        this.setState({successMessage:true});
+                        this.onFormResult();
 
                     }else{
                         this.setState({errorMessage:true});
                     }
                 }
             )
+    }
+
+    onFormResult(){
+        this.setState({formToComplete:false, showResult:true, showFeedback: true,  formCTA: 'Resubmit'});
     }
 
     //render it!
