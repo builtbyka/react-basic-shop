@@ -1,7 +1,7 @@
 import React from 'react';
 import Feedback from './feedback/feedback.jsx';
 import InputElement from './InputElement.jsx';
-import Activity from './activities/activity.jsx';
+import OutputElement from './OutputElement.jsx';
 
 
 class App extends React.Component {
