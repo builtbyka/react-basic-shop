@@ -218,7 +218,7 @@ div.feedback{
         .tooltipee{
             border-bottom: 1px dashed #333;
             display: inline;
-            &:hover + [role="tooltip"] {
+            [role="tooltip"].active{
                 @include fadeText(fadeIn, ease-in, 0.5s);
                 display: block;
                 z-index: 1000;
