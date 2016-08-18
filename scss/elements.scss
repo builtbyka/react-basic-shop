@@ -221,6 +221,7 @@ div.feedback{
             &:hover + [role="tooltip"] {
                 @include fadeText(fadeIn, ease-in, 0.5s);
                 display: block;
+                z-index: 1000;
             }
             
         }
