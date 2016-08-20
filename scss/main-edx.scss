@@ -12,6 +12,14 @@
         display: none;
     }
 }
+
+.course-wrapper .course-content .vert-mod .vert>.xblock-student_view, .course-wrapper .courseware-results-wrapper .vert-mod .vert>.xblock-student_view{
+    border: none !important;
+}
+.course-wrapper .course-content .vert-mod>div header{
+    margin-bottom: -55px;
+}
+
 .xmodule_display.xmodule_CapaModule div.problem .action{
     margin-top: 0;
     overflow: auto;
@@ -39,6 +47,22 @@
 
 .xblock--drag-and-drop{
     max-width: 100% !important;
+}
+
+.vert{
+    clear: both;
+}
+
+.vert-1{
+    clear: none;
+    float: right;
+    width: 33%;
+}
+
+.vert-2{
+    clear: none;
+    float: left;
+    width: 64%;
 }
 
 #main{

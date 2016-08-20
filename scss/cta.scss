@@ -1,4 +1,4 @@
-button:not(.bookmark-button):not(.control):not(.add-xblock-component-button):not(.button-component):not(.unbutton):not(.link-button), a.button, input[type="submit"]{
+button:not(.bookmark-button):not(.control):not(.add-xblock-component-button):not(.button-component):not(.unbutton):not(.link-button), a.button, input[type="submit"], input.input-main{
         @include box-sizing(border-box);
         background-color: $blue-grey;
         background-image: none;

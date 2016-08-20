@@ -7,13 +7,13 @@
     margin: 20px 0;
     
     > h2{
-        padding-left: 45px;
+        padding-left: 35px;
     }
     
     
     header{
         h2{
-            padding-left: 45px;
+            padding-left: 35px;
         }
     }
 }
@@ -38,22 +38,22 @@ div.success{
 
 div.feedback{
     @extend .element;
-    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@feedback");
+    @include bgimage("feedback");
     border-bottom: 10px solid $accent-color;
     & > h3{
         margin: 0 0 20px 0;
-        padding-left: 45px;
+        padding-left: 30px;
     }
 }
 
 .xblock--drag-and-drop{
     @extend .element;
-    @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@interaction');
+    @include bgimage('interaction');
 }
 
 .individual-activity{
     @extend .element;
-    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@individual");
+    @include bgimage("individual");
     border-bottom: 10px solid $accent-blue;
 }
 
@@ -61,7 +61,7 @@ div.feedback{
 .info-box{
     @extend .element;
     background-color: $highlight;
-    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@info");
+    @include bgimage("info");
     border: 1px solid #ccc;
     padding-left: 55px;
     
@@ -75,9 +75,23 @@ div.feedback{
         }
     }
 }
+
+.math-highlight{
+    @extend .element;
+    background-color: $light-grey;
+
+    p{
+            text-align: center;
+            &:last-of-type{
+                margin-bottom: 0;
+            }
+    }
+
+}
+
 .keynote{
     @extend .element;
-    @include bgimage("https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@keynote");
+    @include bgimage("keynote");
     border-bottom: 10px solid $accent-color;
 }
 
@@ -96,25 +110,25 @@ div.feedback{
         header{
             @extend .element;
             &.wordcloud{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@wordcloud');
+                @include bgimage('wordcloud');
             }
-            &.geotagging{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@geotagging');
+            &.geotagging, &.Geotagging-activity{
+                @include bgimage('geotagging');
             }
             &.interaction{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@interaction');
+                @include bgimage('interaction');
             }
             &.quiz{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@quiz');
+                @include bgimage('quiz');
             }
-            &.question{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@question');
+            &.question, &.individual-question{
+                @include bgimage('question');
             }
             &.download{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@download');
+                @include bgimage('download');
             }
             &.scenario{
-                @include bgimage('https://edge.edx.org/asset-v1:ImperialCollegeBusinessSchool+IB0001+20016-T1+type@asset+block@scenario');
+                @include bgimage('scenario');
             }
             border-bottom: 0;
             margin-bottom: 0;
@@ -228,3 +242,48 @@ div.feedback{
         
     }
 
+    //summary boxes
+
+    .learning-objective{
+        border: 1px solid $edx-accent;
+        border-radius: 3px;
+        padding: 10px;
+
+        h2{
+            color: $edx-accent;
+            font-size: 15px;
+            padding-left: 30px;
+            background-repeat: no-repeat;
+            background-position: -3px -1px;
+            @include bgimage('summary');
+        }
+
+        p{
+            color: $edx-lighter-accent !important;
+            font: normal 1.2em/1.2em "Open Sans",Verdana,Geneva,sans-serif,sans-serif;
+            font-size: 13px;
+        }
+
+        
+    }
+
+    //polls
+
+    .xblock-student_view-poll{
+        @extend .element;
+        .poll-header{
+            background-repeat: no-repeat;
+            padding-left: 35px;
+            @include bgimage('poll');
+        }
+        .poll-answers{
+            margin-left: 5px;
+        }
+        .poll-answer-text{
+            line-height: 14px;
+            padding-top: 10px;
+        }
+        .percentage-gauge-container{
+            margin-left: 10px;
+        }
+    }

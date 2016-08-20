@@ -9,6 +9,8 @@ $highlight: #FFFFEA;
 $key-area: #F2F3F5;
 $incorrect: #fa8484;
 $correct: #cef097;
+$edx-accent: #0d4e6c;
+$edx-lighter-accent: #255f7a;
 
 @mixin blinking(){
     -webkit-animation: fadeIn 1.5s linear infinite;
@@ -99,6 +101,6 @@ $correct: #cef097;
 }
 
 @mixin bgimage($name) {
-  $url:"#{$name}.png";
+  $url:"https://courses.edx.org/asset-v1:ImperialBusinessX+ICBS002+3T2016+type@asset+block@#{$name}.png";
   background-image: url($url);
 }
