@@ -2,7 +2,7 @@
 .element{
     background-color: $key-area;
     background-repeat: no-repeat;
-    background-position: 15px 15px;
+    background-position: 15px 6px;
     padding: 15px;
     margin: 20px 0;
     
@@ -39,41 +39,60 @@ div.success{
 div.feedback{
     @extend .element;
     @include bgimage("feedback");
+    background-position: 10px 6px;
     border-bottom: 10px solid $accent-color;
     & > h3{
         margin: 0 0 20px 0;
-        padding-left: 30px;
+        padding-left: 40px;
     }
-}
 
-.xblock--drag-and-drop{
-    @extend .element;
-    @include bgimage('interaction');
-}
-
-.individual-activity{
-    @extend .element;
-    @include bgimage("individual");
-    border-bottom: 10px solid $accent-blue;
-}
-
-
-.info-box{
-    @extend .element;
-    background-color: $highlight;
-    @include bgimage("info");
-    border: 1px solid #ccc;
-    padding-left: 55px;
-    
-    &.active{
-        @include fadeText(fadeIn, ease-in, 2s);
+    & > h2{
+        padding-left: 40px;
     }
-    
+
     p{
-        &:last-of-type{
-            margin-bottom: 0;
-        }
+        border: none !important;
+         &:before{
+             content: none
+         }
     }
+}
+.xmodule_display.xmodule_CapaModule div.problem .solution-span>span{
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+.detailed-solution{
+    @extend div.feedback;
+
+    > p:first-of-type{
+        display: none;
+    }
+}
+
+section.feedback, .poll-feedback{
+    @extend .element;
+    position: relative;
+    padding: 0;
+        & > h3{
+        @include bgimage("feedback");
+        background-repeat: no-repeat;
+        background-position: 15px 6px;
+        margin: 0 0 20px 0;
+        padding: 15px 15px 5px 50px;
+        }
+        p{
+            border: none !important;
+            &:before{
+                content: none
+            }
+        }
+        .messages{
+            border-bottom: 10px solid $accent-color;
+            padding: 5px 15px;
+            
+        }
 }
 
 .math-highlight{
@@ -89,10 +108,15 @@ div.feedback{
 
 }
 
-.keynote{
+.keynote, .download{
     @extend .element;
     @include bgimage("keynote");
     border-bottom: 10px solid $accent-color;
+}
+
+.download{
+    @include bgimage("download");
+    background-position: 6px 8px;
 }
 
 .example{
@@ -120,15 +144,21 @@ div.feedback{
             }
             &.quiz{
                 @include bgimage('quiz');
+                background-position: 6px 9px;
             }
             &.question, &.individual-question{
                 @include bgimage('question');
+                background-position: 4px 8px;
             }
             &.download{
                 @include bgimage('download');
             }
-            &.scenario{
-                @include bgimage('scenario');
+            // &.scenario{
+            //     @include bgimage('scenario');
+            // }
+            &.open-discussion{
+                 @include bgimage('open-discussion');
+                 background-position: 12px 13px;
             }
             border-bottom: 0;
             margin-bottom: 0;
@@ -168,6 +198,37 @@ div.feedback{
                 margin: 0;
             }
         }
+
+       header.open-discussion + .activity{
+            border-bottom: none;
+            margin-bottom: -50px;
+        }
+
+        header.quiz + .activity{
+           background: none;
+           border-bottom: none;
+           padding: 0;
+
+           >div{
+               background-color: $key-area;
+               padding: 5px 15px;
+
+               > span:last-of-type{
+                   border-bottom: 10px solid $blue-grey;
+                   margin-left: -15px;
+                   margin-bottom: -5px;
+                   padding: 0 15px;
+                   width: 100%;
+               }
+           }
+           > span{
+               background-color: $key-area;
+               border-bottom: 10px solid $blue-grey;
+               padding: 0 15px;
+               margin-bottom: 0;
+           }
+        }
+
         @import 'chartdraw';
         @import 'chartist';
         @import 'feedback';
@@ -190,26 +251,27 @@ div.feedback{
         clear: both;
         padding: 10px 0;
     }
-    
-    .tooltips{
-        padding: 20px 0;
-        & > div{
-            margin: 20px 0;
-            position: relative;
-        }
+
+    .tooltip-wrap{
+        border-bottom: 1px dashed #333;
+        font-weight: normal;
+        position: relative;
         [role="tooltip"]{
             background: $blue-grey;
             bottom: 10px;
             border-radius: 5px;
+            color: white;
             display: none;
             padding: 10px;
             position: absolute;
+            left: -130px;
             bottom: 40px;
-            width: 50%;
-            
-            &:after{
+            width: 300px;
+            z-index: 1000;
+
+                &:after{
                     top: 100%;
-                    left: 30px;
+                    left: 170px;
                     border: solid transparent;
                     content: " ";
                     height: 0;
@@ -220,27 +282,15 @@ div.feedback{
                     border-width: 15px;
                     margin-left: -15px;
             }
-            
-            p{
-                color: white;
-                
-                &:last-of-type{
-                    margin-bottom: 0;
-                }
-            }
         }
-        .tooltipee{
-            border-bottom: 1px dashed #333;
-            display: inline;
-            [role="tooltip"].active{
+
+        &:hover{
+            [role="tooltip"]{       
                 @include fadeText(fadeIn, ease-in, 0.5s);
-                display: block;
-                z-index: 1000;
             }
-            
         }
-        
     }
+    
 
     //summary boxes
 
@@ -269,21 +319,191 @@ div.feedback{
 
     //polls
 
-    .xblock-student_view-poll{
+    .poll-block{
         @extend .element;
+        border-bottom: 10px solid $blue-grey !important;
         .poll-header{
             background-repeat: no-repeat;
-            padding-left: 35px;
+            background-position: -11px -9px;
+            clear: both;
+            padding-left: 30px;
             @include bgimage('poll');
+
+            &:nth-child(2){
+                @include bgimage('feedback');
+            }
         }
         .poll-answers{
             margin-left: 5px;
         }
         .poll-answer-text{
+            font-weight: normal;
             line-height: 14px;
             padding-top: 10px;
+            p{
+                line-height: 22px;
+            }
         }
         .percentage-gauge-container{
             margin-left: 10px;
         }
+        .poll-footnote{
+            display: none;
+        }
+        hr{
+            display: none;
+        }
     }
+    .poll-block-form-wrapper, .poll-block{
+        .input-main{
+            float: left;
+            margin: 40px 0 0 -15px;
+        }
+        .view-results-button-wrapper{
+            float: left;
+            margin: 35px 0 0 5px;
+        }
+    }
+
+    //discussion
+
+    .discussion-module{
+        background-color: $key-area !important;
+        border-bottom: 10px solid $blue-grey;
+    }
+
+    //edx drag and drop styles
+
+.xblock--drag-and-drop .popup{
+    background-color: rgba(173, 13, 13, 0.5) !important;
+    top: 50% !important;
+    left: 50% !important;
+    padding: 5px;
+    margin-left: -105px !important;
+    width: 200px !important;
+    p{
+        font-weight: bold;
+    }
+}
+
+.xblock--drag-and-drop{
+    max-width: 100% !important;
+}
+
+.xblock--drag-and-drop .drag-container{
+    background: none;
+}
+.xblock--drag-and-drop{
+    >h2{
+        background-color: $key-area;
+        @include bgimage('interaction');
+        background-repeat: no-repeat;
+        background-position: 15px 6px;
+        padding: 15px 15px 15px 50px;
+        margin: 0;
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .drag-container{
+        @extend .element;
+        margin: 0;
+    }
+     .problem{
+         background: $key-area;
+         padding: 15px;
+     }
+
+    .actions-toolbar{
+        background: white;
+        border-top: 10px solid $accent-blue;
+    }
+}
+
+.individual-activity{
+    @extend .element;
+    @include bgimage("individual");
+    border-bottom: 10px solid $accent-blue;
+}
+
+.info-box, .scenario, .learn-more{
+    @extend .element;
+    background-color: $highlight;
+    @include bgimage("info");
+    border: 1px solid #ccc;
+    
+    &.active{
+        @include fadeText(fadeIn, ease-in, 2s);
+    }
+    
+    p{
+        &:last-of-type{
+            margin-bottom: 0;
+        }
+    }
+}
+
+.scenario{
+    background-position: 8px 7px;
+}
+
+.learn-more{
+    @include bgimage("learnmore");
+    background-position: 9px 7px;
+}
+
+.info-box{
+    padding-left: 55px;
+}
+
+//quizzes / multiple choice
+
+.xmodule_display.xmodule_CapaModule div.problem .choicegroup label, .xmodule_display.xmodule_CapaModule div.problem .choicetextgroup label{
+    border: none !important;
+    padding: 7px 0 0 30px !important;
+
+    &:hover{
+        border: none !important;
+    }
+}
+
+.xmodule_display.xmodule_CapaModule div.problem .choicegroup .indicator-container, .xmodule_display.xmodule_CapaModule div.problem .choicetextgroup .indicator-container{
+    display: none !important;
+}
+
+.xmodule_display.xmodule_CapaModule div.problem .action{
+    margin-top: 0;
+    overflow: auto;
+}
+
+//questions
+
+.trailing_text, p.answer{
+    font-size: 12px;
+    font-style: italic;
+    padding-left: 10px; 
+}
+
+//feedback hints
+.feedback-hint-correct{
+    background: white;
+    padding: 10px;
+    .hint-label{
+        @include bgimage("feedback");
+        background-position: 0px 1px;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        color: $accent-color;
+        line-height: 23px;
+        padding-left: 21px;
+        vertical-align: top;
+    }
+
+    p{
+        &:last-of-type{
+             margin-bottom: 0;
+        }
+       
+    }
+}

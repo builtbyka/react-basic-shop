@@ -1,8 +1,9 @@
-h2{
+h2, h4{
     color: black;
     float: none;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
+    font-weight: normal;
     letter-spacing: -0.5px;
     margin: 0 0 20px 0;
     text-align: left;
@@ -43,6 +44,7 @@ table{
     width: 100%;
     th, td{
         border: 1px solid #333;
+        font-size: 14px;
         padding: 10px;
     }
     th{

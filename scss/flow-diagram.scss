@@ -7,7 +7,6 @@
         margin-bottom: 20px;
 
         button{
-            float: right !important;
             margin-bottom: 0 !important;
             margin-left: 0 !important;
             margin-right: 0 !important;
@@ -24,6 +23,12 @@
         &:hover{
             text-decoration: underline;
         }
+    }
+}
+
+.feedback{
+    .flow-diagram, .click-to-reveal{
+        padding: 5px !important;
     }
 }
 

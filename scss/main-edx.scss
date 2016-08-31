@@ -1,4 +1,15 @@
 //edx
+.studio-xblock-wrapper{
+    overflow:auto;
+}
+//the annoying staff debug info
+.wrap-instructor-info{
+    display: none;
+
+    &.studio-view{
+        display: block;
+    }
+}
 .xmodule_display.xmodule_SequenceModule .sequence-nav{
     border-bottom: none !important;
     z-index: 0 !important;
@@ -20,10 +31,6 @@
     margin-bottom: -55px;
 }
 
-.xmodule_display.xmodule_CapaModule div.problem .action{
-    margin-top: 0;
-    overflow: auto;
-}
 
 .problem-header, .problem-progress{
     display: none !important;
@@ -33,21 +40,6 @@
     padding: 2px !important;
 }
 
-.xblock--drag-and-drop .popup{
-    background-color: rgba(173, 13, 13, 0.5) !important;
-    top: 50% !important;
-    left: 50% !important;
-    padding: 5px;
-    margin-left: -105px !important;
-    width: 200px !important;
-    p{
-        font-weight: bold;
-    }
-}
-
-.xblock--drag-and-drop{
-    max-width: 100% !important;
-}
 
 .vert{
     clear: both;

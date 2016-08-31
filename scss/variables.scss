@@ -101,6 +101,6 @@ $edx-lighter-accent: #255f7a;
 }
 
 @mixin bgimage($name) {
-  $url:"https://courses.edx.org/asset-v1:ImperialBusinessX+ICBS002+3T2016+type@asset+block@#{$name}.png";
+  $url:"http://www.imperial.ac.uk/business-school/elearning/courses_edx/common/icons/#{$name}.png";
   background-image: url($url);
 }
