@@ -393,6 +393,7 @@ section.feedback, .poll-feedback{
 .xblock--drag-and-drop .drag-container{
     background: none;
 }
+
 .xblock--drag-and-drop{
     >h2{
         background-color: $key-area;
@@ -408,6 +409,7 @@ section.feedback, .poll-feedback{
     }
     .drag-container{
         @extend .element;
+        background: $key-area;
         margin: 0;
     }
      .problem{

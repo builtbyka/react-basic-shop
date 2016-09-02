@@ -11,7 +11,7 @@ class App extends React.Component {
 
         //get environment we're in first, so we know how to collect the other data
         let env = this.getEnv();
-
+        
         //the state
         this.state = {
             id : 'BOILERPLATE',
