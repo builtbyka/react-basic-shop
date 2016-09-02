@@ -47,6 +47,7 @@ button:not(.bookmark-button):not(.control):not(.add-xblock-component-button):not
 //drag and drop buttons
 .xblock--drag-and-drop .actions-toolbar .action-toolbar-item.sidebar-buttons{
     float: left;
+    margin-top: 20px;
 }
 
 .xblock--drag-and-drop .sidebar-buttons .sidebar-button-wrapper {

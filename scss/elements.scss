@@ -3,6 +3,7 @@
     background-color: $key-area;
     background-repeat: no-repeat;
     background-position: 15px 6px;
+    border-top: none;
     padding: 15px;
     margin: 20px 0;
     
@@ -357,11 +358,11 @@ section.feedback, .poll-feedback{
     .poll-block-form-wrapper, .poll-block{
         .input-main{
             float: left;
-            margin: 40px 0 0 -15px;
+            margin: 50px 0 0 -15px;
         }
         .view-results-button-wrapper{
             float: left;
-            margin: 35px 0 0 5px;
+            margin: 45px 0 0 5px;
         }
     }
 
@@ -478,6 +479,38 @@ section.feedback, .poll-feedback{
     margin-top: 0;
     overflow: auto;
 }
+
+//wordcloud{
+    .xblock-student_view-word_cloud{
+        > div{
+            @extend .element;
+            border-bottom: 10px solid $blue-grey;
+        }
+
+        h3{
+             @include bgimage('wordcloud');
+             background-repeat: no-repeat;
+             background-position: -7px -5px;
+             padding-left: 40px;
+        }
+
+        .result_cloud_section{
+            > ul, > p{
+                display: none;
+            }
+
+        }
+
+        .input_cloud_instructions{
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        button{
+            margin-left: -15px !important;
+            margin-top: 50px !important;
+        }
+    }
 
 //questions
 
