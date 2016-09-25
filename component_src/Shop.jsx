@@ -36,7 +36,6 @@ class Shop extends React.Component {
     //update basket with items bought
 
    updateBasket(item, amount){
-
        let itemsBought = Object.assign({}, this.state.itemsBought);
        //if changed mind and down to 0, remove from bought items list
        if(amount < 1){

@@ -10,7 +10,7 @@ gulp dev
 
 To run tests
 
-mocha --require tests/setup.js tests/*.spec.js
+npm test
 
 
 

@@ -4,8 +4,7 @@
   "description": "Currency changing shop",
   "main": "app.js",
   "scripts": {
-    "test": "mocha -w test/helpers/browser.js test/*.spec.js",
-    "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
+    "test": "mocha --require tests/setup.js tests/*.spec.js"
   },
   "dependencies": {
     "connect-history-api-fallback": "^1.2.0",

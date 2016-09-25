@@ -34,7 +34,7 @@ class ShopItems extends React.Component {
             items[item].quantity += 1;
         }
         this.props.updateBasket(item, items[item].quantity);
-        this.setState({items : items})   
+        this.setState({items : items});  
     }
    
     //render it!
@@ -67,6 +67,7 @@ class ShopItems extends React.Component {
 			<ul id="shopping-list">
                 {shopItems}
             </ul>
+
 		)
 	}
 }
