@@ -1,14 +1,17 @@
 button{
     background-color: $accent; /* Green */
-    border: none;
+    border: 1px solid white;
     color: white;
     height: 30px;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 
     &:hover{
-
+        background-color: white;
+        border: 1px solid $accent;
+        color: $accent;
     }
 }

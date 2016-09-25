@@ -1,5 +1,6 @@
 import React from 'react';
 import ShopItems from './ShopItems.jsx';
+import Basket from './Basket.jsx';
 
 class Shop extends React.Component {
 
@@ -16,6 +17,7 @@ class Shop extends React.Component {
 
         //start user answers object, but if certain type of input put in default value
         //this.state.databaseRequest = this.dynamicResults(this.state.questions, 'str');
+        this.updateBasket = this.updateBasket.bind(this);
 	}
 
     //recieve basket by json
@@ -33,16 +35,23 @@ class Shop extends React.Component {
         });
     }
 
-   
+    //when items added or taken away in shopitems - calculate basket price here
 
+   updateBasket(item, amount){
+       let itemsBought = Object.assign({}, this.state.itemsBought);
+       itemsBought[item] = this.state.items[item];
+       itemsBought[item].amount = amount;
+       this.setState({itemsBought : itemsBought});
+   }
 
     //render it!
   
 	render(){
 		return (
 			<div>
+                <Basket itemsBought={this.state.itemsBought}/>
                 <main>
-                    <ShopItems items={this.state.items}/>
+                    <ShopItems items={this.state.items} updateBasket={this.updateBasket}/>
                 </main>
             </div>
 		)

@@ -1,24 +1,24 @@
 {
   "Peas" : {
-    "Image" : "https://www.ocado.com/productImages/630/63031011_1_640x640.jpg?identifier=4c6d8d90d7b5bc250ebec5d90bcc2ea0",
+    "Image" : "/img/peas.jpg",
     "Measure" : "per bag",
     "Price" : 0.95,
     "quantity" : 0
   },
   "Eggs" : {
-    "Image" : "https://www.ocado.com/productImages/466/46679011_0_640x640.jpg?identifier=70ccd622fbcf656151231881a8e95285",
+    "Image" : "/img/eggs.jpg",
     "Measure" : "per dozen",
     "Price" : 2.10,
     "quantity" : 0
   },
   "Milk" : {
-    "Image" : "https://www.ocado.com/productImages/245/24581011_0_640x640.jpg?identifier=604a371df6264e905f2cf9341ad4c7b6",
+    "Image" : "/img/milk.jpg",
     "Measure" : "per bottle",
-    "Price" : 2.10,
+    "Price" : 1.30,
     "quantity" : 0
   },
   "Beans" : {
-    "Image" : "https://www.ocado.com/productImages/122/12279011_0_640x640.jpg?identifier=cbf4b58fc815a8c251d99f675965f09f",
+    "Image" : "/img/beans.jpg",
     "Measure" : "per can",
     "Price" : 0.73,
     "quantity" : 0

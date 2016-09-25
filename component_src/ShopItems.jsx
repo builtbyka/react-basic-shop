@@ -10,6 +10,7 @@ class ShopItems extends React.Component {
                 items : {}
         };
 
+        //bind this to functions
         this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -30,19 +31,19 @@ class ShopItems extends React.Component {
         }else{
             items[item].quantity += 1;
         }
-
-        this.setState({items : items})
-        
+        this.props.updateBasket(item, items[item].quantity);
+        this.setState({items : items})   
     }
    
     //render it!
   
 	render(){
-        let items = this.props.items, counter = 0, shopItems;
+        let items = this.props.items, counter = 0, shopItems, price;
         if(Object.keys(items).length !== 0 && items.constructor === Object){
             shopItems = Object.keys(items).map(
                 key => {
                     counter ++;
+                    price = items[key].Price.toFixed(2);
                     return(
                         <li key={"shopitem_"+counter}>
                             <div>
@@ -50,7 +51,7 @@ class ShopItems extends React.Component {
                                 <div className="image-wrap">
                                     <img src={items[key].Image}/>
                                 </div>
-                                <p>£{items[key].Price} {items[key].Measure}</p>
+                                <p>£{price} {items[key].Measure}</p>
                                 <div className="button-wrap">
                                     <button data-item={key} value="-" onClick={this.handleClick}>-</button><span>{this.state.items[key].quantity}</span><button data-item={key} value="+" onClick={this.handleClick}>+</button>
                                 </div>
