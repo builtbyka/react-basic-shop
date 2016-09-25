@@ -1,14 +1,19 @@
+.logo{
+    font-family: "Arial Black", Gadget, sans-serif;
+    text-transform: uppercase;
+}
+
 body > header, body > footer{
     background: white;
     border-top: 1px solid $accent;
     border-bottom: 1px solid $accent;
-    height: 80px;
+    height: 60px;
     position : fixed;
     text-align: center;
     width: 100%;
 
     h1{
-        font-size: 1.2em;
+        font-size: 1em;
         font-style: italic;
     }
 }

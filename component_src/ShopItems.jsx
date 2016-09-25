@@ -15,11 +15,13 @@ class ShopItems extends React.Component {
 	}
 
     componentWillReceiveProps(nextProps){
+        //once received from JSON items will load and loop
         this.setState({
             items : nextProps.items
         })
     }
 
+    //update items state to reflect new quantity of items
     handleClick(e){
         let math = e.currentTarget.value,
         item = e.currentTarget.getAttribute('data-item'),

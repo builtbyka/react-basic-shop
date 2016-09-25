@@ -10,9 +10,7 @@ class Shop extends React.Component {
         //the state
         this.state = {
                 items : {},
-                itemsBought : {},
-                currency : '',
-                currencyConverstion : 1
+                itemsBought : {}
         };
 
         //start user answers object, but if certain type of input put in default value
@@ -35,12 +33,17 @@ class Shop extends React.Component {
         });
     }
 
-    //when items added or taken away in shopitems - calculate basket price here
+    //update basket with items bought
 
    updateBasket(item, amount){
+
        let itemsBought = Object.assign({}, this.state.itemsBought);
-       itemsBought[item] = this.state.items[item];
-       itemsBought[item].amount = amount;
+       //if changed mind and down to 0, remove from bought items list
+       if(amount < 1){
+           delete itemsBought[item];
+       }else{
+           itemsBought[item] = this.state.items[item];
+       }
        this.setState({itemsBought : itemsBought});
    }
 

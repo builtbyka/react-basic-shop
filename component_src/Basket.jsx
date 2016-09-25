@@ -14,19 +14,21 @@ class Basket extends React.Component {
         };
 
          this.handleClick = this.handleClick.bind(this);
+         this.handleCheckoutClick = this.handleCheckoutClick.bind(this);
 
     }
 
     //expecting the items along with the items bought
 
    componentWillReceiveProps(nextProps){
-        // calculate total
+        // calculate total in GBP in basket before checkout
         let basketTotal;
         if(Object.keys(nextProps.itemsBought).length !== 0 && nextProps.itemsBought.constructor === Object){
+            // if itemsBought has length, add up the total
             let loopItems = Object.keys(nextProps.itemsBought).map(
                 key => {
                     let boughtItems = 0,
-                        itemTotal = (Math.round(nextProps.itemsBought[key].Price * nextProps.itemsBought[key].amount * 100)/100);
+                    itemTotal = (Math.round(nextProps.itemsBought[key].Price * nextProps.itemsBought[key].quantity * 100)/100);
                     boughtItems += itemTotal;
                     return (boughtItems)
                 }
@@ -34,9 +36,11 @@ class Basket extends React.Component {
             )
             basketTotal = loopItems.reduce((a, b) => a + b, 0).toFixed(2);
         }else{
+            // if not make it 0
             basketTotal = 0;
             basketTotal = basketTotal.toFixed(2);
         }
+
         // with newly received items, itemsbought and total set the state. will change with purchases. 
        this.setState({
             itemsBought : nextProps.itemsBought,
@@ -46,8 +50,11 @@ class Basket extends React.Component {
     }
 
     handleClick(){
-        let atCheckout = (this.state.atCheckout ? false : true);
-        this.setState({atCheckout : atCheckout});
+        this.setState({atCheckout : true});
+    }
+
+    handleCheckoutClick(){
+         this.setState({atCheckout : false});
     }
 
   
@@ -56,7 +63,7 @@ class Basket extends React.Component {
     render(){
         let checkout;
             if(this.state.atCheckout){
-                checkout = (<Checkout total={this.state.basketTotal} items={this.state.items} itemsBought={this.state.itemsBought}/>);
+                checkout = (<Checkout onClick={this.handleCheckoutClick} total={this.state.basketTotal} itemsBought={this.state.itemsBought}/>);
             }
             return (
                 <div>

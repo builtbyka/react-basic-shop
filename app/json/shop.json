@@ -1,24 +1,24 @@
 {
   "Peas" : {
-    "Image" : "/img/peas.jpg",
+    "Image" : "../img/peas.jpg",
     "Measure" : "per bag",
     "Price" : 0.95,
     "quantity" : 0
   },
   "Eggs" : {
-    "Image" : "/img/eggs.jpg",
+    "Image" : "../img/eggs.jpg",
     "Measure" : "per dozen",
     "Price" : 2.10,
     "quantity" : 0
   },
   "Milk" : {
-    "Image" : "/img/milk.jpg",
+    "Image" : "../img/milk.jpg",
     "Measure" : "per bottle",
     "Price" : 1.30,
     "quantity" : 0
   },
   "Beans" : {
-    "Image" : "/img/beans.jpg",
+    "Image" : "../img/beans.jpg",
     "Measure" : "per can",
     "Price" : 0.73,
     "quantity" : 0
