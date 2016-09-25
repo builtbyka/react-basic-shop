@@ -1,7 +1,7 @@
 require('es6-promise').polyfill();
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
+import Shop from './Shop.jsx';
 
 //Render application in browser
-ReactDOM.render(<App/>, document.getElementById('boilerplate'))
+ReactDOM.render(<Shop/>, document.getElementById('shop'))

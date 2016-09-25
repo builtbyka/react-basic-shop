@@ -1,0 +1,17 @@
+@mixin row() {
+  font-size: 0;
+}
+
+// This is column mixins.
+@mixin col ($col, $sum, $align: top) {
+    width: 100%;
+    display: inline-block;
+    font-size: 16px;
+
+    @media only screen and (min-width: $tablet-portrait) {
+            width: percentage($col/$sum);
+            vertical-align: $align;
+    }
+
+    &.fluid { width: percentage($col/$sum); }
+}

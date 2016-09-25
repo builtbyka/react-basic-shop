@@ -5,10 +5,25 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
+
+*,
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+      @media screen and (max-width: $tablet-portrait) {
+        font-size: 98%;
+      }
+    }
  
 html {
+  font-family: $base-font-family;
   -webkit-text-size-adjust: 100%; /* 2 */
   overflow-y: scroll;
+  min-height: 150vh;
 }
 
 /**
@@ -130,7 +145,7 @@ dfn {
  */
 
 h1 {
-  font-size: 2em;
+  font-size: 1.5em;
   margin: 0.67em 0;
 }
 

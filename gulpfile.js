@@ -30,7 +30,7 @@ gulp.task('webpack',function(callback){
 
 
 gulp.task('sass', function () {
-	return gulp.src('./scss/main-edx.scss')
+	return gulp.src('./scss/style.scss')
 	.pipe(sourcemaps.init())
 	.pipe(sass().on('error', sass.logError))
 	.pipe(sourcemaps.write())

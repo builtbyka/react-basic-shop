@@ -1,8 +1,7 @@
-#React Clientside boilerplate
+#BJSS Currency Changing shopping app
 
-Run npm install to get all modules setup
+Please see https://docs.google.com/document/d/1ZrGpcH9o_-HdP4-HWzm7I09mui6dMVLz-q5OeaNG2z4/edit# for initial app plan
 
-Run gulp dev to start developing with local server
 
 
 

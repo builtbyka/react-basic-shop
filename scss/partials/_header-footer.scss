@@ -1,0 +1,23 @@
+header, footer{
+    @include col(1,1);
+
+    background: white;
+    border-top: 1px solid $accent;
+    border-bottom: 1px solid $accent;
+    height: 80px;
+    position : fixed;
+    text-align: center;
+
+    h1{
+        font-size: 1.2em;
+        font-style: italic;
+    }
+}
+
+header{
+    top: 0;
+}
+
+footer{
+    bottom: 0;
+}

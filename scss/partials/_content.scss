@@ -1,0 +1,66 @@
+html, body{
+    min-height: 100%;
+}
+
+main{
+    padding: 20px;
+    margin: 80px auto 0;
+}
+
+#shopping-list{
+    li{
+        @include col(1,4);
+        padding: 10px;
+
+        > div{
+            border: 1px solid $accent;
+            padding: 10px;
+ 
+            .image-wrap{
+                height: 150px;
+                overflow: hidden; 
+                width : 100%;
+            }
+
+            .button-wrap{
+                border: 1px solid #333;
+                height: 32px;
+                position: relative;
+                margin: 10px 0;
+                width: 100%;
+
+                button{
+                    &:first-of-type{
+                        left: 0;
+                    }
+                    &:last-of-type{
+                        right: 0;
+                    }
+                    position: absolute;
+                    width: 20%;
+                }
+
+                span{
+                    display: inline-block;
+                    line-height: 30px;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            h1{
+                border-bottom: 1px solid $accent;
+                font-size: 1em;
+            }
+
+            img{
+                height: auto;
+                width : 150px; 
+            }
+
+            p{
+                margin: 10px 0;
+            }
+        }
+    }
+}

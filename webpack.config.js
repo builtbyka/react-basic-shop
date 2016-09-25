@@ -24,7 +24,7 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, 'app'),
-		filename: 'boilerplate.js'
+		filename: 'shop.js'
 	},
 	module: {
 		loaders: [{
@@ -41,7 +41,7 @@ module.exports = {
 	"process.env": {
 	// This has effect on the react lib size
 	//set to production for build
-	"NODE_ENV": JSON.stringify("production")
+	"NODE_ENV": JSON.stringify("development")
 	},
 	__DEV__:true
 	}), new webpack.optimize.UglifyJsPlugin()]
