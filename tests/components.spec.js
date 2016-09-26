@@ -48,3 +48,14 @@ describe('Basket container', () => {
       expect(wrapper.state('basketTotal')).to.equal('2.60');
     });
 });
+
+describe('Checkout container', () => {
+  it('render "No items in your basket" if basket empty', () => {
+    const itemsBought = {};
+    const wrapper = shallow(<Checkout itemsBought={itemsBought}/>);
+    expect(wrapper.find('li')).to.have.length(2);
+    expect(wrapper.containsAllMatchingElements([
+          <li className="no-items">No items in your basket</li>
+    ])).to.equal(true);
+  });
+});
