@@ -21,6 +21,7 @@ class Basket extends React.Component {
     //expecting the items along with the items bought
 
    componentWillReceiveProps(nextProps){
+       console.log(nextProps);
         // calculate total in GBP in basket before checkout
         let basketTotal;
         if(Object.keys(nextProps.itemsBought).length !== 0 && nextProps.itemsBought.constructor === Object){
