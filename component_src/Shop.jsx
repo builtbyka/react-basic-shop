@@ -22,7 +22,7 @@ class Shop extends React.Component {
     componentDidMount() {
         // get items from json and setstate. Feed in to shopitems jsx. Allows us to scale up shop by having dynamic items.
        fetch('./json/shop.json')
-        .then(function(response) {
+        .then((response) => {
             if (response.status >= 400) {
                 throw new Error('Bad response from server');
             }

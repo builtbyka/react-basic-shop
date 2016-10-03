@@ -4,4 +4,4 @@ node_modules/
 .idea/
 *.map
 .vscode/
-app/boilerplate.js
+app/shop.js
